@@ -45,9 +45,11 @@ struct MySection: SectionProviding {
 }
 ```
 and wrap to AnySection         
-```swift let mySection = AnySection(MySection()) ```
+```swift
+let mySection = AnySection(MySection())
+```
 
-### Create cells by conforming to Registering & Dequeueing
+### Create cells by conforming to Registering & Dequeueing
 
 ```swift
 extension AlphaCell: Registering {
@@ -75,13 +77,16 @@ struct MyItem: ItemProviding {
 ```
 
 and wrap to AnyItem         
-```swift let myItem = AnyItem(MyItem(title: "hello")) ```
+```swift
+let myItem = AnyItem(MyItem(title: "hello"))
+```
 
 ### Register cells once before applying snapshot
 collectionView.register(cell: AlphaCell.self, item: Alpha.self)
 collectionView.register(cell: BetaCell.self, item: Beta.self)
 
 ### Prepare data and apply
+```swift
 let section = AnySection(mySection)
 let item = AnyItem(myItem)
 
@@ -89,6 +94,6 @@ var snap = NSDiffableDataSourceSnapshot<AnySection, AnyItem>()
 snap.appendSections([section])
 snap.appendItems([item], toSection: section)
 dataSource.apply(snap)
-
+```
 
 Congrats 🎉🎉🎉
