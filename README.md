@@ -4,7 +4,7 @@ Build reusable multiple section layouts with UICollectionViewCompositionalLayout
 
 Your datasource should conform to Any types 
 
-```
+```swift
 var dataSource: UICollectionViewDiffableDataSource<AnySection, AnyItem>
 
 dataSource = .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -14,7 +14,7 @@ dataSource = .init(collectionView: collectionView) { collectionView, indexPath, 
 ```
 
 ### Your layout
-```
+```swift
 var layout: UICollectionViewLayout {
     return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] index, _ in
         guard let section = self?.dataSource.sectionIdentifier(for: index) else { return nil }
@@ -24,7 +24,7 @@ var layout: UICollectionViewLayout {
 ```
 
 ### Sample section definition
-```
+```swift
 struct MySection: SectionProviding {
     let id = UUID()
     
@@ -45,11 +45,11 @@ struct MySection: SectionProviding {
 }
 ```
 and wrap to AnySection         
-``` let mySection = AnySection(MySection()) ```
+```swift let mySection = AnySection(MySection()) ```
 
 ### Create cells by conforming to Registering & Dequeueing
 
-```
+```swift
 extension AlphaCell: Registering {
     static var registration: UICollectionView.CellRegistration<AlphaCell, AnyItem> = UICollectionView.CellRegistration<AlphaCell, AnyItem>(cellNib: .init(nibName: String(describing: AlphaCell.self), bundle: nil)) { cell, indexPath, itemIdentifier in
         var config = cell.defaultContentConfiguration()
@@ -68,14 +68,14 @@ extension AlphaCell: Dequeueing {
 ```
 
 ### Sample item definition
-```
+```swift
 struct MyItem: ItemProviding {
     let title: String
 }
 ```
 
 and wrap to AnyItem         
-``` let myItem = AnyItem(MyItem(title: "hello")) ```
+```swift let myItem = AnyItem(MyItem(title: "hello")) ```
 
 ### Register cells once before applying snapshot
 collectionView.register(cell: AlphaCell.self, item: Alpha.self)
