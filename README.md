@@ -87,12 +87,12 @@ collectionView.register(cell: BetaCell.self, item: Beta.self)
 
 ### Prepare data and apply
 ```swift
-let section = AnySection(mySection)
 let item = AnyItem(myItem)
+let section = AnySection(mySection, items: [item])
 
 var snap = NSDiffableDataSourceSnapshot<AnySection, AnyItem>()
 snap.appendSections([section])
-snap.appendItems([item], toSection: section)
+snap.appendItems(section.items, toSection: section)
 dataSource.apply(snap)
 ```
 
